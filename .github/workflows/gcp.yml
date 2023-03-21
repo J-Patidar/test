@@ -1,0 +1,25 @@
+name: Storyteller Backend
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploying in staging server
+        uses: appleboy/ssh-action@master
+        with:
+          # staging
+          # host: ${{ secrets.STAGING_HOST }}
+          # USERNAME: ${{ secrets.STAGING_SSH_USERNAME }}
+          # PORT: ${{ secrets.GCP_PORT }}
+          # KEY: ${{ secrets.STAGING_SSH_KEY }}
+          command_timeout: 9m
+          script: |
+            cd /var/www/test
+            sudo git checkout .
+            sudo git pull origin main
